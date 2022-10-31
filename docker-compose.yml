@@ -18,6 +18,8 @@ services:
     environment:
       - CONTAINERROLE=all
       - TIMEZONE=America/Phoenix
+    env_file:
+      - ./env.list
 volumes:
   docassemblebackup:
     driver: local
