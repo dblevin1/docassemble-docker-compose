@@ -1,0 +1,27 @@
+#Credit: https://gist.github.com/toolness/9be652d071529a557e616146792f028b
+#Credit: https://github.com/ttamg/deploy-docassemble
+version: '3'
+services:
+  docassemble:
+    image: jhpyle/docassemble:latest
+    volumes:
+      - docassemblebackup:/usr/share/docassemble/backup
+    stop_grace_period: 1m
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - 5000:5000
+      - 80:80
+      - 443:443
+      - 5432:5432
+    environment:
+      - CONTAINERROLE=all
+      - TIMEZONE=America/Phoenix
+volumes:
+  docassemblebackup:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './backup'
